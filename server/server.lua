@@ -17,6 +17,7 @@ function RetrieveComponents()
     Phone = exports['mythic-base']:FetchComponent('Phone')
     Banking = exports['mythic-base']:FetchComponent('Banking')
     Tow = exports['mythic-base']:FetchComponent('Tow')
+    Version = exports['mythic-base']:FetchComponent('Version')
 end
 
 AddEventHandler('Core:Shared:Ready', function()
@@ -33,6 +34,7 @@ AddEventHandler('Core:Shared:Ready', function()
         'Phone',
         'Banking',
         'Tow',
+        'Version',
 	}, function(error)
 		if #error > 0 then return; end
 		RetrieveComponents()
@@ -152,6 +154,8 @@ AddEventHandler('Core:Shared:Ready', function()
                 end
             end
         end)
+
+        Version:Check('Mythic-Framework/Mythic-VersionCheckers', GetCurrentResourceName())
 
         Callbacks:RegisterServerCallback('Tow:ReturnTruck', function(source, data, cb)
             local char = Fetch:Source(source):GetData('Character')
